@@ -30,6 +30,8 @@ export const CustomInput = ({ label, errors, touched, margin = 0, iconName, ...p
         <TextInput
 
           {...props}
+          placeholderTextColor="rgba(0,0,0,0.5)"
+          style={styles.input}
         />
       </View>
       <Text style={styles.inputError}>{errors && touched && errors}</Text>
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  input:{
+    color: 'black',
   },
 
   inputError: {

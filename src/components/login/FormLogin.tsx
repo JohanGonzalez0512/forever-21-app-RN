@@ -3,6 +3,8 @@ import { Formik, FormikProps } from 'formik'
 import * as Yup from "yup";
 import { CustomInput } from '../ui/CustomInput'
 import { ButtonLogin } from './ButtonLogin'
+import { useAppDispatch } from '../../hooks';
+import { startLogin } from '../../store/auth';
 
 
 interface InitialValues {
@@ -12,7 +14,9 @@ interface InitialValues {
 
 export const FormLogin = () => {
 
-    const initialValues: InitialValues = { email: '', password: '' };
+    const dispatch = useAppDispatch();
+
+    const initialValues: InitialValues = { email: 'jopi20101@gmail.com', password: 'jopigonzalez123' };
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
@@ -24,7 +28,7 @@ export const FormLogin = () => {
     })
 
     const handleLogin = (values: InitialValues) => {
-        console.log(values);
+        dispatch(startLogin(values))
     }
 
 
@@ -82,6 +86,7 @@ export const FormLogin = () => {
                 )}
 
             </Formik>
+
         </>
     )
 }
