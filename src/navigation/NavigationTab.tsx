@@ -1,6 +1,6 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { CaptureScreen, OrderScreen } from '../screens';
+import { CaptureScreen, OrderScreen, UserScreen } from '../screens';
 import { colors } from '../theme/globalTheme';
 import { StatisticScreen } from '../screens/StatisticScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -33,8 +33,12 @@ export const NavigationTab = () => {
                             iconName = 'bar-chart';
                             !(focused) && (iconName += '-outline');
                             break;
+                        case 'UserScreen':
+                            iconName = 'person';
+                            !(focused) && (iconName += '-outline')
+                            break;
                     }
-                    return <Icon name={iconName} size={20} color={color} />
+                    return <Icon name={iconName} size={25} color={color} />
                 }
             })}
         >
@@ -43,6 +47,7 @@ export const NavigationTab = () => {
             <Tab.Screen name="CaptureScreen" component={CaptureScreen} />
             <Tab.Screen name="OrderScreen" component={OrderScreen} />
             <Tab.Screen name="StatisticScreen" component={StatisticScreen} />
+            <Tab.Screen name="UserScreen" component={UserScreen} />
 
         </Tab.Navigator>
     );

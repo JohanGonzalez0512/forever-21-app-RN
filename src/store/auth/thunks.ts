@@ -1,6 +1,8 @@
 import { Dispatch } from 'redux';
 import { login, logout } from './authSlice';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import { User } from '../../interfaces';
+import { forever21Api } from '../../api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 type DataUser = {
@@ -12,49 +14,47 @@ export const startLogin = (dataUser: DataUser) => {
     return async (dispatch: Dispatch) => {
         try {
 
-            dispatch(login({
-                name: 'Johan',
-                email: dataUser.email,
-            }));
+            const { data } = await forever21Api.post<User>('/auth/login', dataUser);
+
+
+            dispatch(login(data));
+
+            await AsyncStorage.setItem('token', data.token);
+
+
 
         } catch (error: any) {
-            console.log("Response API", error)
-            console.log(error.response.detail);
+            console.log(error.response.data.message);
+            // console.log(error.response);
         }
     };
 };
 
-// export const checkToken = () => {
-//     return async (dispatch: Dispatch) => {
-//         try {
-//             const token = await AsyncStorage.getItem('token');
-//            
-//
-//             if (!token ) return dispatch(logout());
 
-//             const resp = await remaxApi.post('/auth/login/refresh/', {
-//                 refresh: tokenRefresh,
-//                 email
-//             });
-//             if (resp.status !== 200) {
-//                 return dispatch(logout());
-//             }
-//             dispatch(login(resp.data));
 
-//             await AsyncStorage.setItem('token', resp.data.token.access);
-//         
+export const checkToken = () => {
+    return async (dispatch: Dispatch) => {
+        try {
+            const token = await AsyncStorage.getItem('token');
 
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// }
+
+            if (!token) return dispatch(logout());
+
+            const { data } = await forever21Api.get('/auth/check-status',);
+
+            dispatch(login(data));
+
+            await AsyncStorage.setItem('token', data.token);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
 
 export const startLogout = () => {
     return async (dispatch: Dispatch) => {
         try {
-            // await AsyncStorage.removeItem('token');
-           
+            await AsyncStorage.removeItem('token');
             dispatch(logout());
         } catch (error) {
             console.log(error);
