@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export const HomeScreen = () => {
+export const CaptureScreen = () => {
   return (
     <View>
-      <Text>HomeScreen</Text>
+      <Text>CaptureScreen</Text>
     </View>
   )
 }
