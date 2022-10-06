@@ -1,18 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../theme/globalTheme';
+import { View, StyleSheet } from 'react-native';
+import { TitleLogin, FormLogin } from '../components/login';
 
 export const LoginScreen = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.preTitle}>Inicia Sesión en</Text>
-        <Text style={styles.title}>FOREVER 21</Text>
-      </View>
-
-
-
-    
+      <TitleLogin />
+      <FormLogin />
     </View>
   )
 }
@@ -22,20 +16,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
-  titleContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  preTitle:{
 
-    fontSize: 20,
-    color: '#494949',
-  },  
-  title: {
-    fontSize: 55,
-    color: colors.secondary,
-    fontFamily: "FontPrimary",
-  }
 }
 )
