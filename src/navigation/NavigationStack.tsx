@@ -4,6 +4,8 @@ import { NavigationTab } from './NavigationTab';
 import { LoginScreen } from '../screens';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { checkToken } from '../store/auth';
+import { ActivityIndicator, View } from 'react-native';
+import { LoadingScreen } from '../screens/LoadingScreen';
 
 
 
@@ -30,12 +32,18 @@ export const NavigationStack = () => {
         >
 
             {
+                (status === 'checking') &&
+                <Stack.Screen name="Loading" component={LoadingScreen} />
+            }
+
+            {
                 (status === 'authenticated') ?
                     <Stack.Screen name="NavigationTab" component={NavigationTab} />
                     :
                     <Stack.Screen name="Login" component={LoginScreen} />
 
             }
+
 
         </Stack.Navigator>
     );
