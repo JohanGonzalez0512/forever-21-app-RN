@@ -46,7 +46,7 @@ export const checkToken = () => {
 
             await AsyncStorage.setItem('token', data.token);
         } catch (error) {
-            console.log(error);
+            dispatch(logout());
         }
     }
 }

@@ -16,7 +16,7 @@ export const FormLogin = () => {
 
     const dispatch = useAppDispatch();
 
-    const initialValues: InitialValues = { email: 'jopi20101@gmail.com', password: 'jopigonzalez123' };
+    const initialValues: InitialValues = { email: '', password: '' };
 
     const validationSchema = Yup.object().shape({
         email: Yup.string()
