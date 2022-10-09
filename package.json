@@ -20,6 +20,7 @@
     "formik": "^2.2.9",
     "react": "18.1.0",
     "react-native": "0.70.2",
+    "react-native-camera-kit": "^13.0.0",
     "react-native-gesture-handler": "^2.7.0",
     "react-native-paper": "^4.12.5",
     "react-native-permissions": "^3.6.1",

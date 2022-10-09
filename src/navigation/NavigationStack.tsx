@@ -52,7 +52,7 @@ export const NavigationStack = () => {
         >
 
             {
-                (status === 'checking' || cameraStatus !== 'granted') &&
+                (status === 'checking' && cameraStatus !== 'granted') &&
                 <Stack.Screen name="Loading" component={LoadingScreen} />
             }
 

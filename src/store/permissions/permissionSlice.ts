@@ -1,21 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PermissionStatus } from 'react-native-permissions';
+import { Permission, PermissionStatus } from 'react-native-permissions';
 
 
 interface PermissionState {
-    cameraStatus: PermissionStatus;
-  
+    permissionStatus: Record<"android.permission.CAMERA" | "android.permission.WRITE_EXTERNAL_STORAGE", PermissionStatus>;
+
 }
 const initialState: PermissionState = {
-    cameraStatus: "unavailable",
+    permissionStatus: {
+        "android.permission.CAMERA": "unavailable",
+        "android.permission.WRITE_EXTERNAL_STORAGE": "unavailable",
+    },
 };
 
 export const permissionSlice = createSlice({
     name: 'permission',
     initialState: initialState,
     reducers: {
-        setPermissions: (state: PermissionState, { payload }: PayloadAction<PermissionStatus>) => {
-            state.cameraStatus = payload;
+        setPermissions: (state: PermissionState, { payload }: PayloadAction<Record<"android.permission.CAMERA" | "android.permission.WRITE_EXTERNAL_STORAGE", PermissionStatus>>) => {
+            state.permissionStatus = payload;
         }
     }
 });
