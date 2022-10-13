@@ -1,9 +1,12 @@
 import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { CaptureScreen, OrderScreen, UserScreen } from '../screens';
+import { OrderScreen, UserScreen } from '../screens';
 import { colors } from '../theme/globalTheme';
 import { StatisticScreen } from '../screens/StatisticScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+
+import { ProductsStack } from './ProductsStack';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -16,12 +19,12 @@ export const NavigationTab = () => {
             inactiveColor="gray"
             labeled={false}
             barStyle={{ backgroundColor: colors.primary }}
-            
+
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, focused }) => {
                     let iconName: string = '';
                     switch (route.name) {
-                        case 'CaptureScreen':
+                        case 'ProductsStack':
                             iconName = 'camera';
                             !(focused) && (iconName += '-outline')
                             break;
@@ -44,7 +47,7 @@ export const NavigationTab = () => {
         >
 
 
-            <Tab.Screen name="CaptureScreen" component={CaptureScreen} />
+            <Tab.Screen name="ProductsStack" component={ProductsStack} />
             <Tab.Screen name="OrderScreen" component={OrderScreen} />
             <Tab.Screen name="StatisticScreen" component={StatisticScreen} />
             <Tab.Screen name="UserScreen" component={UserScreen} />

@@ -6,6 +6,7 @@ import { LoginScreen, LoadingScreen } from '../screens';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { checkToken } from '../store/auth';
 import { startAskingPermission, startCheckingPermission } from '../store/permissions';
+import realm from '../db';
 
 
 
@@ -13,7 +14,7 @@ const Stack = createNativeStackNavigator();
 export const NavigationStack = () => {
 
     const status = useAppSelector(state => state.auth.status)
-    const cameraStatus = useAppSelector(state => state.permission.cameraStatus)
+    const permissionStatus = useAppSelector(state => state.permission.permissionStatus)
 
 
     const dispatch = useAppDispatch();
@@ -25,13 +26,14 @@ export const NavigationStack = () => {
         });
     }, [])
 
-    
+
     useEffect(() => {
-        if (cameraStatus !== 'granted') {
+        if ((permissionStatus['android.permission.CAMERA'] !== 'granted')
+            && (permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] !== 'granted')) {
             dispatch(startAskingPermission());
 
         }
-    }, [cameraStatus])
+    }, [permissionStatus])
 
 
     useEffect(() => {
@@ -40,8 +42,26 @@ export const NavigationStack = () => {
         }
     }, [])
 
+    const startDB = async () => {
+        const db = await realm();
+        db.write(() => {
+            db.create('Cat', {
+                name: 'Mittens',
+                type: 'Tabby',
+            });
+        });
+    }
 
-   
+    useEffect(() => {
+        startDB();
+    }, [])
+
+
+
+
+
+
+
 
 
 
@@ -52,7 +72,9 @@ export const NavigationStack = () => {
         >
 
             {
-                (status === 'checking' && cameraStatus !== 'granted') &&
+                (status === 'checking' || (permissionStatus['android.permission.CAMERA'] !== 'granted')
+                    && (permissionStatus['android.permission.WRITE_EXTERNAL_STORAGE'] !== 'granted'))
+                &&
                 <Stack.Screen name="Loading" component={LoadingScreen} />
             }
 
