@@ -28,7 +28,7 @@ export const productSlice = createSlice({
                 //check if the product is already in the array
                 state.products.find(product => product.SKU === payload.SKU) ?
                     //if it is, return add the quantity
-                    state.products.map(product => product.SKU === payload.SKU ? 
+                    state.products.map(product => product.SKU === payload.SKU ?
                         { ...product, quantity: product.quantity + 1 } : product)
                     //if it is not, return the array with the new product
                     : [...state.products, {
@@ -49,7 +49,10 @@ export const productSlice = createSlice({
         decrement: (state: AuthState, { payload }: PayloadAction<Product>) => {
             state.products = state.products?.map((product) => {
                 if (product.SKU === payload.SKU) {
-                    product.quantity -= 1;
+                    if (product.quantity > 1) {
+                        product.quantity -= 1;
+                    }
+
                 }
                 return product;
             });
