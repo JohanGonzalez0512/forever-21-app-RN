@@ -4,7 +4,8 @@ import { Header, NoData } from '../../components/ui';
 import { Buttons, ProductCard } from '../../components/products';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/ProductsStack';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { startUpdatingProducts } from '../../store/products';
 
 
 
@@ -12,7 +13,7 @@ interface Props extends NativeStackScreenProps<RootStackParamList, 'ProductsScre
 export const ProductScreen: FC<Props> = ({ navigation }) => {
 
     const { products } = useAppSelector(state => state.product)
-
+    const dispatch = useAppDispatch()
 
 
     return (
@@ -44,7 +45,7 @@ export const ProductScreen: FC<Props> = ({ navigation }) => {
 
 
             <Buttons
-                handlePressUpload={() => console.log('left')}
+                handlePressUpload={() => dispatch(startUpdatingProducts()) }
                 handlePressAdd={() => navigation.navigate('CaptureScreen')}
             />
 

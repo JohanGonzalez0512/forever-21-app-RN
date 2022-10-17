@@ -1,5 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 interface Product {
     SKU: string;
     name: string;
@@ -38,7 +38,7 @@ export const productSlice = createSlice({
 
         },
 
-        increment: (state: AuthState, { payload }: PayloadAction<Product>) => {
+        increment  : (state: AuthState, { payload }: PayloadAction<Product>) => {
             state.products = state.products?.map((product) => {
                 if (product.SKU === payload.SKU) {
                     product.quantity += 1;
@@ -52,6 +52,8 @@ export const productSlice = createSlice({
                     if (product.quantity > 1) {
                         product.quantity -= 1;
                     }
+                   
+
 
                 }
                 return product;

@@ -5,6 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../navigation/ProductsStack';
 import { addProduct } from './productSlice';
 import { existenceResp } from '../../interfaces';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface DataChecking {
     navigation: NativeStackNavigationProp<RootStackParamList, "CaptureScreen", undefined>
     code: string
@@ -60,6 +61,21 @@ export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
         }
     };
 };
+
+
+export const startUpdatingProducts = () => {
+    return async (dispatch: Dispatch) => {
+
+
+        // TODO: update products and clean the redux state
+        
+       await AsyncStorage.removeItem('persist:root');
+
+       
+
+
+    }
+}
 
 
 export const startCreatingProduct = ({ navigation, code }: DataChecking) => {
