@@ -1,30 +1,44 @@
-import React from 'react'
-import { View, Text, Dimensions } from 'react-native'
-import { CameraScreen, CameraType, Camera } from 'react-native-camera-kit';
-export const CaptureScreen = () => (
-  <View style={
-    {
-      flex: 1,
-    }
-  }>
-    <Camera
-      style={{
-        flex: 1,
-        
-      }}
-      cameraType={CameraType.Back}
-      flashMode={'auto'}
-      focusMode={'on'}
-      zoomMode={'on'}
-      scanBarcode={true}
-      onReadCode={(event: any) => console.log(
-        event.nativeEvent
-      )} 
-    
-      showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
-      laserColor='red' // (default red) optional, color of laser in scanner frame
-      frameColor='white' // (default white) optional, color of border of scanner frame
-    />
+import React, { FC, useState } from 'react'
+import { View } from 'react-native'
+import { RootStackParamList } from '../../navigation/ProductsStack';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { CameraType, Camera } from 'react-native-camera-kit';
+import { useAppDispatch } from '../../hooks/hooks';
+import { startCheckingExistence } from '../../store/products';
 
-  </View>
-)
+
+interface Props extends NativeStackScreenProps<RootStackParamList, 'CaptureScreen'> { }
+export const CaptureScreen: FC<Props> = ({ navigation }) => {
+
+  const [flag, setFlag] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const handleOnScan = (event: any) => {
+    if (flag) return;
+    dispatch(startCheckingExistence({
+      navigation,
+      code: event.nativeEvent.codeStringValue
+    }));
+    setFlag(true);
+  }
+
+
+  return (
+
+    <View style={{ flex: 1 }}>
+      <Camera
+        style={{ flex: 1 }}
+        cameraType={CameraType.Back}
+        flashMode={'auto'}
+        focusMode={'on'}
+        zoomMode={'on'}
+        scanBarcode={true}
+        onReadCode={(event: any) => handleOnScan(event)}
+        showFrame={true}
+        laserColor='red'
+        frameColor='white'
+      />
+    </View>
+  )
+
+}
+

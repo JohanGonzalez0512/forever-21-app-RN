@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { OrderScreen, UserScreen } from '../screens';
 import { colors } from '../theme/globalTheme';
 import { StatisticScreen } from '../screens/StatisticScreen';
@@ -9,17 +9,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { ProductsStack } from './ProductsStack';
 
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 export const NavigationTab = () => {
     return (
         <Tab.Navigator
             initialRouteName="CaptureScreen"
-            activeColor={colors.secondary}
-            inactiveColor="gray"
-            labeled={false}
-            barStyle={{ backgroundColor: colors.primary }}
-
+            detachInactiveScreens={true}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, focused }) => {
                     let iconName: string = '';
@@ -42,7 +38,14 @@ export const NavigationTab = () => {
                             break;
                     }
                     return <Icon name={iconName} size={25} color={color} />
-                }
+                },
+                tabBarActiveTintColor: colors.secondary,
+                tabBarInactiveTintColor: 'gray',
+                tabBarShowLabel: false,
+                headerShown: false,
+                unmountOnBlur: true,
+
+                
             })}
         >
 
