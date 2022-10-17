@@ -1,7 +1,7 @@
 import React from 'react'
 import { Formik, FormikProps } from 'formik'
 import * as Yup from "yup";
-import { CustomInput } from '../ui/CustomInput'
+import { CustomInput } from '../ui'
 import { ButtonLogin } from './ButtonLogin'
 import { useAppDispatch } from '../../hooks';
 import { startLogin } from '../../store/auth';

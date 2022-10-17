@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { Dispatch } from 'redux';
 import { login, logout } from './authSlice';
 import { User } from '../../interfaces';
@@ -25,6 +26,14 @@ export const startLogin = (dataUser: DataUser) => {
 
         } catch (error: any) {
             console.log(error.response.data.message);
+            Alert.alert(
+                "Error",
+                "Hubo un error al iniciar sesión con las credenciales proporcionadas",
+                [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+            )
             // console.log(error.response);
         }
     };

@@ -6,7 +6,6 @@ import { LoginScreen, LoadingScreen } from '../screens';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { checkToken } from '../store/auth';
 import { startAskingPermission, startCheckingPermission } from '../store/permissions';
-import realm from '../db';
 
 
 
@@ -42,29 +41,7 @@ export const NavigationStack = () => {
         }
     }, [])
 
-    const startDB = async () => {
-        const db = await realm();
-        db.write(() => {
-            db.create('Cat', {
-                name: 'Mittens',
-                type: 'Tabby',
-            });
-        });
-    }
-
-    useEffect(() => {
-        startDB();
-    }, [])
-
-
-
-
-
-
-
-
-
-
+    
 
     return (
         <Stack.Navigator
