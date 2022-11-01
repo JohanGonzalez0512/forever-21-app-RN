@@ -16,7 +16,9 @@ interface Props extends TextInputProps {
 export const CustomInput = ({ label, errors, touched, margin = 0, iconName, ...props }: Props) => {
   return (
     <View style={{ marginHorizontal: margin }}>
+
       <Text style={styles.label} >{label}</Text>
+      
       <View style={{
         ...styles.inputContainer,
         borderColor: (touched && errors) ? '#FF0000' : '#e9eaef',
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  input:{
+  input: {
     color: 'black',
   },
 

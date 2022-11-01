@@ -1,12 +1,14 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { CaptureScreen, ProductScreen, FormScreen } from '../screens/products';
+import { CaptureScreen, ProductScreen, CreateProductScreen } from '../screens/products';
 
 
 export type RootStackParamList = {
     ProductsScreen: undefined;
     CaptureScreen: undefined;
-    FormScreen: undefined;
+    CreateProductScreen: {
+        code: string
+    };
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -24,9 +26,9 @@ export const ProductsStack = () => {
             }}
 
         >
+            <Stack.Screen name="CreateProductScreen" component={CreateProductScreen} />
             <Stack.Screen name="ProductsScreen" component={ProductScreen} />
             <Stack.Screen name="CaptureScreen" component={CaptureScreen} />
-            <Stack.Screen name="FormScreen" component={FormScreen} />
 
         </Stack.Navigator>
     );

@@ -1,8 +1,7 @@
 import React from 'react'
 import { Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from "yup";
-import { CustomInput } from '../ui'
-import { ButtonLogin } from './ButtonLogin'
+import { CustomInput, ButtonSubmit } from '../ui'
 import { useAppDispatch } from '../../hooks';
 import { startLogin } from '../../store/auth';
 
@@ -78,7 +77,7 @@ export const FormLogin = () => {
                             onChangeText={handleChange('password')}
                         />
 
-                        <ButtonLogin
+                        <ButtonSubmit
                             title="Iniciar Sesión"
                             onPress={handleSubmit}
                             disabled={isSubmitting}

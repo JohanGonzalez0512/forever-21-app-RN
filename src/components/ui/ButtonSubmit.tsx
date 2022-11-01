@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { FC } from 'react'
 
 
@@ -8,7 +8,7 @@ interface Props {
     disabled: boolean
 }
 
-export const ButtonLogin: FC<Props> = ({ title, onPress, disabled }) => {
+export const ButtonSubmit: FC<Props> = ({ title, onPress, disabled }) => {
     return (
         <TouchableOpacity
             disabled={disabled}            

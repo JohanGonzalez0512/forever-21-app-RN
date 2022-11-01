@@ -14,7 +14,6 @@ interface DataChecking {
 export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
     return async (dispatch: Dispatch) => {
         try {
-            console.log(code);
 
             if (code.length > 12) {
                 navigation.navigate('ProductsScreen');
@@ -35,13 +34,9 @@ export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
 
                 dispatch(addProduct(data.product));
                 navigation.navigate('ProductsScreen');
+            } else {
+                navigation.navigate('CreateProductScreen', { code });
             }
-
-
-            // } else {
-            //     console.log('jejej form')
-            //     // navigation.navigate('FormScreen');
-            // }
 
 
 
@@ -68,10 +63,10 @@ export const startUpdatingProducts = () => {
 
 
         // TODO: update products and clean the redux state
-        
-       await AsyncStorage.removeItem('persist:root');
 
-       
+        await AsyncStorage.removeItem('persist:root');
+
+
 
 
     }
