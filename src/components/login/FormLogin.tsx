@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik, FormikProps } from 'formik'
+import { Formik, FormikHelpers, FormikProps } from 'formik'
 import * as Yup from "yup";
 import { CustomInput } from '../ui'
 import { ButtonLogin } from './ButtonLogin'
@@ -27,8 +27,8 @@ export const FormLogin = () => {
             .required('Contraseña requerida'),
     })
 
-    const handleLogin = (values: InitialValues) => {
-        dispatch(startLogin(values))
+    const handleLogin = (values: InitialValues, { setSubmitting }: FormikHelpers<InitialValues>) => {
+        dispatch(startLogin(values, setSubmitting));
     }
 
 
@@ -43,7 +43,7 @@ export const FormLogin = () => {
                 validationSchema={validationSchema}
                 onSubmit={handleLogin}
             >
-                {({ handleChange, values, handleSubmit, handleBlur, touched, errors }: FormikProps<InitialValues>) => (
+                {({ handleChange, values, handleSubmit, handleBlur, touched, errors, isSubmitting }: FormikProps<InitialValues>) => (
 
                     <>
 
@@ -81,6 +81,8 @@ export const FormLogin = () => {
                         <ButtonLogin
                             title="Iniciar Sesión"
                             onPress={handleSubmit}
+                            disabled={isSubmitting}
+
                         />
                     </>
                 )}

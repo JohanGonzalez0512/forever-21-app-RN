@@ -11,7 +11,7 @@ type DataUser = {
     password: string;
 }
 
-export const startLogin = (dataUser: DataUser) => {
+export const startLogin = (dataUser: DataUser, setSubmitting: (isSubmitting: boolean) => void) => {
     return async (dispatch: Dispatch) => {
         try {
 
@@ -25,16 +25,22 @@ export const startLogin = (dataUser: DataUser) => {
 
 
         } catch (error: any) {
-            console.log(error.response.data.message);
+            setSubmitting(false);
             Alert.alert(
                 "Error",
-                "Hubo un error al iniciar sesión con las credenciales proporcionadas",
+
+                `${error.response?.data
+                    ?
+                    'Hubo un error al iniciar sesión con las credenciales proporcionadas'
+                    :
+                    'Hubo un error al iniciar sesión intentelo de nuevo más tarde'}`,
                 [
-                    
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                 ],
             )
-            // console.log(error.response);
+
+
+
         }
     };
 };

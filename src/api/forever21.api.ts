@@ -8,6 +8,8 @@ forever21Api.interceptors.request.use(
         if (token) {
             config.headers!.Authorization = `Bearer ${token}`;
         }
+
+        config.timeout = 1000 * 5;
         return config;
     }
     

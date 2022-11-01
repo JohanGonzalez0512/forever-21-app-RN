@@ -4,12 +4,14 @@ import React, { FC } from 'react'
 
 interface Props {
     title: string
-    onPress: () => void
+    onPress: () => void,
+    disabled: boolean
 }
 
-export const ButtonLogin: FC<Props> = ({ title, onPress }) => {
+export const ButtonLogin: FC<Props> = ({ title, onPress, disabled }) => {
     return (
         <TouchableOpacity
+            disabled={disabled}            
             activeOpacity={0.8}
             style={styles.button}
             onPress={onPress}
