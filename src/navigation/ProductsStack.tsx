@@ -26,8 +26,8 @@ export const ProductsStack = () => {
             }}
 
         >
-            <Stack.Screen name="CreateProductScreen" component={CreateProductScreen} />
             <Stack.Screen name="ProductsScreen" component={ProductScreen} />
+            <Stack.Screen name="CreateProductScreen" component={CreateProductScreen} />
             <Stack.Screen name="CaptureScreen" component={CaptureScreen} />
 
         </Stack.Navigator>

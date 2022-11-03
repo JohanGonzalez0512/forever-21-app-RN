@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { FC } from 'react'
 import * as Yup from "yup";
-import ImagePicker from 'react-native-image-picker';
 import { Formik, FormikProps } from 'formik';
 import { useAppDispatch } from '../../hooks';
 import { ButtonSubmit, CustomInput } from '../ui';
 import { CustomImagePicker } from './CustomImagePicker';
 import { StyleSheet, View } from 'react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/ProductsStack';
+import { startCreatingProduct } from '../../store/products';
 
 interface InitialValues {
     name: string,
     image: string,
-
 }
 
-export const FormProduct = () => {
+interface Props {
+    SKU: string,
+    navigation: NativeStackNavigationProp<RootStackParamList, "CreateProductScreen", undefined>
+}
+
+export const FormProduct: FC<Props> = ({ SKU, navigation }) => {
 
     const dispatch = useAppDispatch();
 
@@ -25,6 +31,19 @@ export const FormProduct = () => {
         image: Yup.object()
             .required('Imagen requerida')
     })
+
+    const handleSubmit = (values: any) => {
+        dispatch(startCreatingProduct({
+            navigation,
+            SKU,
+            name: values.name,
+            image: {
+                uri: values.image.uri,
+                type: values.image.type,
+                fileName: values.image.fileName
+            },
+        }))
+    }
 
 
 
@@ -38,9 +57,7 @@ export const FormProduct = () => {
                 initialValues={initialValues}
                 enableReinitialize={true}
                 validationSchema={validationSchema}
-                onSubmit={() => {
-                    console.log('submit')
-                }}
+                onSubmit={handleSubmit}
             >
                 {({ handleChange, values, handleSubmit, handleBlur, touched, errors, isSubmitting, setFieldValue, setFieldError, setFieldTouched }: FormikProps<InitialValues>) => (
 
@@ -70,7 +87,7 @@ export const FormProduct = () => {
                             setFieldTouched={setFieldTouched}
                             touched={touched.image}
 
-                         />
+                        />
 
 
                         <ButtonSubmit

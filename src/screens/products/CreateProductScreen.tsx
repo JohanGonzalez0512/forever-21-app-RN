@@ -7,15 +7,18 @@ import { FormProduct } from '../../components/products';
 
 interface Props extends NativeStackScreenProps<RootStackParamList, 'CreateProductScreen'> { }
 
-export const CreateProductScreen: FC<Props> = ({ route }) => {
+export const CreateProductScreen: FC<Props> = ({ route, navigation }) => {
 
-  console.log(route.params)
+  const { code } = route.params;
 
   return (
     <View style={styles.container}>
       <Header title='Crear Producto' />
 
-      <FormProduct />
+      <FormProduct
+        SKU={code}
+        navigation={navigation}
+       />
 
 
     </View>
