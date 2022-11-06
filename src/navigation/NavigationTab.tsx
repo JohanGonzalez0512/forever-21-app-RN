@@ -48,8 +48,6 @@ export const NavigationTab = () => {
                 
             })}
         >
-
-
             <Tab.Screen name="ProductsStack" component={ProductsStack} />
             <Tab.Screen name="OrderScreen" component={OrderScreen} />
             <Tab.Screen name="StatisticScreen" component={StatisticScreen} />

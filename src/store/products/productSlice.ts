@@ -6,12 +6,12 @@ interface Product {
     quantity: number;
 }
 
-interface AuthState {
+interface ProductState {
     status: 'checking' | 'uploaded' | 'not-uploaded';
     errorMessage: string | null;
     products: Product[];
 }
-const initialState: AuthState = {
+const initialState: ProductState = {
     status: 'uploaded',
     products: [],
     errorMessage: null,
@@ -22,7 +22,7 @@ export const productSlice = createSlice({
     name: 'product',
     initialState,
     reducers: {
-        addProduct: (state: AuthState, { payload }: PayloadAction<Product>) => {
+        addProduct: (state: ProductState, { payload }: PayloadAction<Product>) => {
             console.log(payload);
             state.products =
                 //check if the product is already in the array
@@ -38,7 +38,7 @@ export const productSlice = createSlice({
 
         },
 
-        increment: (state: AuthState, { payload }: PayloadAction<Product>) => {
+        increment: (state: ProductState, { payload }: PayloadAction<Product>) => {
             state.products = state.products?.map((product) => {
                 if (product.SKU === payload.SKU) {
                     product.quantity += 1;
@@ -46,7 +46,7 @@ export const productSlice = createSlice({
                 return product;
             });
         },
-        decrement: (state: AuthState, { payload }: PayloadAction<Product>) => {
+        decrement: (state: ProductState, { payload }: PayloadAction<Product>) => {
             state.products = state.products?.map((product) => {
                 if (product.SKU === payload.SKU) {
                     if (product.quantity > 1) {
@@ -56,7 +56,7 @@ export const productSlice = createSlice({
                 return product;
             });
         },
-        cleanProducts: (state: AuthState) => {
+        cleanProducts: (state: ProductState) => {
             state.products = [];
         }
 

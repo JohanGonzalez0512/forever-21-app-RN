@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { authSlice } from './auth';
 import { permissionSlice } from './permissions';
-import { productSlice } from './products/productSlice';
-
-
+import { productSlice } from './products';
+import { statisticSlice } from './statistics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { persistStore, persistReducer } from 'redux-persist'
 
@@ -23,6 +22,7 @@ export const store = configureStore({
         auth: authSlice.reducer,
         permission: permissionSlice.reducer,
         product: productsPersistedReducer,
+        statistic: statisticSlice.reducer,
 
     },
     middleware(getDefaultMiddleware) {

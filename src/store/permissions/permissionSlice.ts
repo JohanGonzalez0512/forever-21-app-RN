@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Permission, PermissionStatus } from 'react-native-permissions';
+import { PermissionStatus } from 'react-native-permissions';
 
 
 interface PermissionState {
