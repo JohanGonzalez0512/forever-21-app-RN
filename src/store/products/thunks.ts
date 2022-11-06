@@ -42,6 +42,8 @@ export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
                 return;
             }
 
+            console.log(code)
+
             const { data } = await forever21Api.get<existenceResp>(`products/existence/${code}`);
 
             if (data.existance) {
@@ -76,6 +78,7 @@ export const startUpdatingProducts = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
 
         const { products } = getState().product
+        console.log(products)
 
         try {
 
@@ -99,10 +102,20 @@ export const startUpdatingProducts = () => {
                     }
                 })
             });
+
+            Alert.alert(
+                "Genial",
+                "Se actualizaron los productos",
+                [
+
+                    { text: "OK" }
+                ],
+            )
+
             // await AsyncStorage.removeItem('persist:root');
 
             dispatch(cleanProducts());
-
+            
         } catch (error: any) {
             console.log(error.response.data.message);
             Alert.alert(
