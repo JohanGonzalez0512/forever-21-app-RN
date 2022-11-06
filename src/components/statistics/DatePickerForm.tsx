@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 import { useAppDispatch } from '../../hooks';
 import { DatePickerButtons } from './DatePickerButtons'
 import * as Yup from "yup";
-import { Formik, FormikProps } from 'formik';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { ButtonSubmit } from '../ui';
 import DatePicker from 'react-native-date-picker';
+import { startGettingStatistics } from '../../store/statistics';
 
 
 interface InitialValues {
@@ -33,8 +34,10 @@ export const DatePickerForm = () => {
             .required('Fecha requerida')
     })
 
-    const handleSubmit = (values: any) => {
-        console.log(values)
+
+    const handleSubmit = (values: InitialValues, { setSubmitting }: FormikHelpers<InitialValues>) => {
+        dispatch(startGettingStatistics(values));
+        setSubmitting(false);
     }
 
 

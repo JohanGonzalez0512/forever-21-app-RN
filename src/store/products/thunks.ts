@@ -44,7 +44,7 @@ export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
 
             console.log(code)
 
-            const { data } = await forever21Api.get<existenceResp>(`products/existence/${code}`);
+            const { data } = await forever21Api.get<existenceResp>(`/products/existence/${code}`);
 
             if (data.existance) {
 

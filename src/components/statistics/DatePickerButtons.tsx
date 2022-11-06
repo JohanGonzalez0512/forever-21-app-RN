@@ -17,7 +17,7 @@ interface Props {
 }
 
 
-export const DatePickerButtons: FC<Props> = ({ value, errors, touched, errors2, touched2, value2, setOpen,  }) => {
+export const DatePickerButtons: FC<Props> = ({ value, errors, touched, errors2, touched2, value2, setOpen, }) => {
     return (
         <>
             <Text style={styles.title}>Filtros</Text>
@@ -41,7 +41,7 @@ export const DatePickerButtons: FC<Props> = ({ value, errors, touched, errors2, 
                             color="rgba(0,0,0,0.5)"
                             style={{ marginRight: 10 }}
                         />
-                        <Text>{`${value ? value : 'Elige una fecha'}`}</Text>
+                        <Text style={styles.date}>{`${value ? value : 'Elige una fecha'}`}</Text>
                     </TouchableOpacity>
                     <Text style={styles.inputError}>{errors && touched && errors}</Text>
                 </View>
@@ -62,7 +62,7 @@ export const DatePickerButtons: FC<Props> = ({ value, errors, touched, errors2, 
                             color="rgba(0,0,0,0.5)"
                             style={{ marginRight: 10 }}
                         />
-                        <Text>{`${value2 ? value2 : 'Elige una fecha'}`}</Text>
+                        <Text style={styles.date}>{`${value2 ? value2 : 'Elige una fecha'}`}</Text>
                     </TouchableOpacity>
                     <Text style={styles.inputError}>{errors2 && touched2 && errors2}</Text>
                 </View>
@@ -108,6 +108,10 @@ const styles = StyleSheet.create({
         color: 'red',
         fontWeight: 'bold',
         marginBottom: 2,
+    },
+    date: {
+        fontSize: 16,
+        color: 'black',
     }
 
 });
