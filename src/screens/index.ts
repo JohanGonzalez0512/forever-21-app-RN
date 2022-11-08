@@ -1,4 +1,3 @@
-export * from './OrderScreen';
 export * from './LoginScreen';
 export * from './StatisticScreen';
 export * from './UserScreen';

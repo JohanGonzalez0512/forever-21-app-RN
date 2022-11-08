@@ -1,12 +1,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { OrderScreen, UserScreen } from '../screens';
+import { UserScreen, StatisticScreen } from '../screens';
 import { colors } from '../theme/globalTheme';
-import { StatisticScreen } from '../screens/StatisticScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
 import { ProductsStack } from './ProductsStack';
+import { OrdersStack } from './OrdersStack';
 
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ export const NavigationTab = () => {
                             iconName = 'camera';
                             !(focused) && (iconName += '-outline')
                             break;
-                        case 'OrderScreen':
+                        case 'OrdersStack':
                             iconName = 'list';
                             !(focused) && (iconName += '-outline')
                             break;
@@ -49,7 +49,7 @@ export const NavigationTab = () => {
             })}
         >
             <Tab.Screen name="ProductsStack" component={ProductsStack} />
-            <Tab.Screen name="OrderScreen" component={OrderScreen} />
+            <Tab.Screen name="OrdersStack" component={OrdersStack} />
             <Tab.Screen name="StatisticScreen" component={StatisticScreen} />
             <Tab.Screen name="UserScreen" component={UserScreen} />
 

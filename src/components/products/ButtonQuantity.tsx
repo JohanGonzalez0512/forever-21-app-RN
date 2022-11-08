@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {TouchableOpacity, StyleSheet } from 'react-native';
 import { colors } from '../../theme/globalTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -26,7 +26,6 @@ export const ButtonQuantity: FC<Props> = ({ handlePress, iconName }) => {
 
 const styles = StyleSheet.create({
     container: {
-
         backgroundColor: colors.secondary,
         borderRadius: 50,
         height: 35,
@@ -34,7 +33,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingLeft: 1,
-
-
     },
 });
