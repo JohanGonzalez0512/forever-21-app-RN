@@ -1,6 +1,10 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { RootStackParamListOrders } from '../../navigation/OrdersStack';
+import { setActiveOrder } from '../../store/orders';
 import { OrderTitleCard } from './OrderTitleCard';
+import { useAppDispatch } from '../../hooks/hooks';
 
 interface Props {
 
@@ -15,12 +19,26 @@ interface Props {
             quantity: number;
         }[];
         length: number;
-    }
-    handleClick: () => void;
+    },
+    navigation: NativeStackNavigationProp<RootStackParamListOrders, "OrdersScreen", undefined>;
 
 }
 
-export const OrderCard: FC<Props> = ({ order, handleClick }) => {
+export const OrderCard: FC<Props> = ({ order, navigation }) => {
+
+    const dispatch = useAppDispatch()
+
+    const handleClick = () => {
+        navigation.navigate('CheckProductsScreen', {
+            products: order.products,
+        })
+        dispatch(setActiveOrder(order))
+
+    }
+
+
+
+
     return (
         <TouchableOpacity
             activeOpacity={0.8}

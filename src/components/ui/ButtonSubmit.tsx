@@ -6,14 +6,19 @@ interface Props {
     title: string
     onPress: () => void,
     disabled: boolean
+    marginBottom?: number
 }
 
-export const ButtonSubmit: FC<Props> = ({ title, onPress, disabled }) => {
+export const ButtonSubmit: FC<Props> = ({ title, onPress, disabled, marginBottom }) => {
     return (
         <TouchableOpacity
             disabled={disabled}            
             activeOpacity={0.8}
-            style={styles.button}
+            style={{
+                ...styles.button,
+                marginBottom: marginBottom ? marginBottom : 0,
+                backgroundColor: disabled ? 'gray' : 'black'
+            }}
             onPress={onPress}
         >
             <Text style={styles.buttonText}>{title}</Text>
