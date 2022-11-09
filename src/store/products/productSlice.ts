@@ -23,7 +23,6 @@ export const productSlice = createSlice({
     initialState,
     reducers: {
         addProduct: (state: ProductState, { payload }: PayloadAction<Product>) => {
-            console.log(payload);
             state.products =
                 //check if the product is already in the array
                 state.products.find(product => product.SKU === payload.SKU) ?

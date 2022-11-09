@@ -4,7 +4,8 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import { FabButton, OrderProductCard } from '../../components/orders';
 import { ButtonSubmit, Header } from '../../components/ui';
 import { RootStackParamListOrders } from '../../navigation/OrdersStack';
-import { useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { startUpdatingOrder } from '../../store/orders';
 
 interface Props extends NativeStackScreenProps<RootStackParamListOrders, 'CheckProductsScreen'> { }
 
@@ -13,24 +14,30 @@ export const CheckProductsScreen: FC<Props> = ({ navigation, route }) => {
     const [disabled, setDisabled] = useState<boolean>(true)
     const { products } = route.params;
     const { quantityProducts } = useAppSelector(state => state.order)
+    const dispatch = useAppDispatch()
 
     const handleCheck = () => {
+       
         products.forEach((product, index) => {
-            if (product.id === quantityProducts![index].id && product.quantity === quantityProducts![index].quantity) {
-                setDisabled(false)
-            } else {
-                setDisabled(true)
-            }
+            quantityProducts?.forEach((productR, i) => {
+                if (product.id === productR.id && product.quantity === productR.quantity) {
+                    setDisabled(false)
+
+                } else {
+                    setDisabled(true)
+                }
+
+            })
+
+
+
         })
-
-        useEffect(() => {
-            handleCheck()
-        }, [])
-
-
-
-
     }
+
+    useEffect(() => {
+        handleCheck()
+
+    }, [route.params])
 
     return (
         <View style={styles.container}>
@@ -55,7 +62,7 @@ export const CheckProductsScreen: FC<Props> = ({ navigation, route }) => {
                 marginBottom={100}
                 disabled={disabled}
                 onPress={() => {
-                    console.log('jejej click')
+                    dispatch(startUpdatingOrder({ navigation }))
                 }}
 
             />

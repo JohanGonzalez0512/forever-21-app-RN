@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { FC } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { RootStackParamListOrders } from '../../navigation/OrdersStack';
 import { setActiveOrder } from '../../store/orders';
 import { OrderTitleCard } from './OrderTitleCard';
@@ -27,12 +27,28 @@ interface Props {
 export const OrderCard: FC<Props> = ({ order, navigation }) => {
 
     const dispatch = useAppDispatch()
+    
 
     const handleClick = () => {
-        navigation.navigate('CheckProductsScreen', {
-            products: order.products,
-        })
-        dispatch(setActiveOrder(order))
+
+        if (order.status) {
+            Alert.alert(
+                "Orden verificada",
+                "Esta orden ya fue verificada",
+                [
+
+                    { text: "OK" }
+                ],
+            )
+
+        }  else {
+            navigation.navigate('CheckProductsScreen', {
+                products: order.products,
+            })
+            dispatch(setActiveOrder(order))
+        }
+        
+
 
     }
 

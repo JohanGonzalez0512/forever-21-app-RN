@@ -42,7 +42,6 @@ export const startCheckingExistence = ({ navigation, code }: DataChecking) => {
                 return;
             }
 
-            console.log(code)
 
             const { data } = await forever21Api.get<existenceResp>(`/products/existence/${code}`);
 
@@ -78,7 +77,6 @@ export const startUpdatingProducts = () => {
     return async (dispatch: Dispatch, getState: () => RootState) => {
 
         const { products } = getState().product
-        console.log(products)
 
         try {
 

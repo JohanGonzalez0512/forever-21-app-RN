@@ -12,7 +12,7 @@ interface DatesValuesExistence {
     navigation: NativeStackNavigationProp<RootStackParamListOrders, "CaptureScreenOrders">
 }
 interface DatesValuesUpdate {
-    id: string,
+    navigation: NativeStackNavigationProp<RootStackParamListOrders, "CheckProductsScreen">
 }
 
 export const startGettingOrders = () => {
@@ -38,12 +38,17 @@ export const startGettingOrders = () => {
     };
 };
 
-export const startUpdatingOrder = ({ id }: DatesValuesUpdate) => {
-    return async (dispatch: Dispatch) => {
+export const startUpdatingOrder = ({ navigation }: DatesValuesUpdate) => {
+    return async (dispatch: Dispatch, getState: () => RootState) => {
         try {
 
-            const { data } = await forever21Api.patch<Order>(`/orders/${id}`);
-            dispatch(updateOrder(data));
+            console.log(getState().order.activeOrder?.id)
+            
+            const { data } = await forever21Api.patch(`/orders/${getState().order.activeOrder?.id}`,{
+                status: true
+            });
+            dispatch(updateOrder(data.order.id));
+            navigation.navigate('OrdersScreen');
 
         } catch (error: any) {
             console.log(error.response.data.message);

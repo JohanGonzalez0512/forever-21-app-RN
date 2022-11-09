@@ -21,7 +21,7 @@ export const OrderProductCard: FC<Props> = ({ product }) => {
         <View style={styles.container}>
             <View>
 
-                <Text style={styles.statusTitle}>{`Nombre del producto: ${product.name}`}</Text>
+                <Text style={styles.statusTitle}>{`Nombre: ${product.name}`}</Text>
                 <Text style={styles.statusTitle}>{`Cantidad requerida: ${product.quantity}`}</Text>
             </View>
 

@@ -17,7 +17,7 @@ export const OrderScreen: FC<Props> = ({ navigation }) => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(startGettingOrders())
-  }, [dispatch])
+  }, [dispatch, navigation])
 
 
 
